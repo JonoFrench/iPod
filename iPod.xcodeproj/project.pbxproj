@@ -36,6 +36,7 @@
 		34DDB8DB1DFEABCF00B3CB32 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDB8DA1DFEABCF00B3CB32 /* UIExtensions.swift */; };
 		34DDB8DD1E01807D00B3CB32 /* clicksound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */; };
 		34E290DD1F2790F000131B5D /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */; };
+		34F2416A200E5E340026ACBC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 34F24169200E5E340026ACBC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		34DDB8DA1DFEABCF00B3CB32 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clicksound.mp3; sourceTree = "<group>"; };
 		34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
+		34F24169200E5E340026ACBC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		345D50E21DF583C1008A082F = {
 			isa = PBXGroup;
 			children = (
+				34F24169200E5E340026ACBC /* README.md */,
 				345D50ED1DF583C1008A082F /* iPod */,
 				345D51021DF583C1008A082F /* iPodTests */,
 				345D510D1DF583C2008A082F /* iPodUITests */,
@@ -321,6 +324,7 @@
 				345D50F91DF583C1008A082F /* LaunchScreen.storyboard in Resources */,
 				34DDB8DD1E01807D00B3CB32 /* clicksound.mp3 in Resources */,
 				345D51211DF58EB7008A082F /* iPodTableViewCell.xib in Resources */,
+				34F2416A200E5E340026ACBC /* README.md in Resources */,
 				345D50F61DF583C1008A082F /* Assets.xcassets in Resources */,
 				34B561C51DF97AAA001B66B5 /* ChicagoFLF.ttf in Resources */,
 				345D50F41DF583C1008A082F /* Main.storyboard in Resources */,
