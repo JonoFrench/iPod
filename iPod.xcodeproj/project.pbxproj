@@ -37,6 +37,11 @@
 		34DDB8DD1E01807D00B3CB32 /* clicksound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */; };
 		34E290DD1F2790F000131B5D /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */; };
 		34F2416A200E5E340026ACBC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 34F24169200E5E340026ACBC /* README.md */; };
+		34F24171200E5FAD0026ACBC /* IMG_3521.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416C200E5FAD0026ACBC /* IMG_3521.jpg */; };
+		34F24172200E5FAD0026ACBC /* IMG_3520.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416D200E5FAD0026ACBC /* IMG_3520.jpg */; };
+		34F24173200E5FAD0026ACBC /* IMG_3522.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416E200E5FAD0026ACBC /* IMG_3522.jpg */; };
+		34F24174200E5FAD0026ACBC /* IMG_3523.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416F200E5FAD0026ACBC /* IMG_3523.jpg */; };
+		34F24175200E5FAD0026ACBC /* IMG_3519.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F24170200E5FAD0026ACBC /* IMG_3519.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +90,11 @@
 		34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clicksound.mp3; sourceTree = "<group>"; };
 		34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
 		34F24169200E5E340026ACBC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		34F2416C200E5FAD0026ACBC /* IMG_3521.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3521.jpg; sourceTree = "<group>"; };
+		34F2416D200E5FAD0026ACBC /* IMG_3520.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3520.jpg; sourceTree = "<group>"; };
+		34F2416E200E5FAD0026ACBC /* IMG_3522.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3522.jpg; sourceTree = "<group>"; };
+		34F2416F200E5FAD0026ACBC /* IMG_3523.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3523.jpg; sourceTree = "<group>"; };
+		34F24170200E5FAD0026ACBC /* IMG_3519.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3519.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +126,7 @@
 		345D50E21DF583C1008A082F = {
 			isa = PBXGroup;
 			children = (
+				34F2416B200E5F820026ACBC /* Screenshots */,
 				34F24169200E5E340026ACBC /* README.md */,
 				345D50ED1DF583C1008A082F /* iPod */,
 				345D51021DF583C1008A082F /* iPodTests */,
@@ -209,6 +220,18 @@
 				34B561C41DF97AAA001B66B5 /* ChicagoFLF.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		34F2416B200E5F820026ACBC /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				34F24170200E5FAD0026ACBC /* IMG_3519.jpg */,
+				34F2416D200E5FAD0026ACBC /* IMG_3520.jpg */,
+				34F2416C200E5FAD0026ACBC /* IMG_3521.jpg */,
+				34F2416E200E5FAD0026ACBC /* IMG_3522.jpg */,
+				34F2416F200E5FAD0026ACBC /* IMG_3523.jpg */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,11 +346,16 @@
 			files = (
 				345D50F91DF583C1008A082F /* LaunchScreen.storyboard in Resources */,
 				34DDB8DD1E01807D00B3CB32 /* clicksound.mp3 in Resources */,
+				34F24171200E5FAD0026ACBC /* IMG_3521.jpg in Resources */,
 				345D51211DF58EB7008A082F /* iPodTableViewCell.xib in Resources */,
 				34F2416A200E5E340026ACBC /* README.md in Resources */,
+				34F24173200E5FAD0026ACBC /* IMG_3522.jpg in Resources */,
 				345D50F61DF583C1008A082F /* Assets.xcassets in Resources */,
+				34F24172200E5FAD0026ACBC /* IMG_3520.jpg in Resources */,
 				34B561C51DF97AAA001B66B5 /* ChicagoFLF.ttf in Resources */,
+				34F24175200E5FAD0026ACBC /* IMG_3519.jpg in Resources */,
 				345D50F41DF583C1008A082F /* Main.storyboard in Resources */,
+				34F24174200E5FAD0026ACBC /* IMG_3523.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
