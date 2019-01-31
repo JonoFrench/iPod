@@ -32,21 +32,28 @@ class iPodTableViewCell: UITableViewCell {
         timer.invalidate()
     }
     
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        print("setSelected \(self.textLabel?.frame)")
+        self.layoutIfNeeded()
+        //print("setSelected \(self.textLabel?.frame)")
         
-        guard (self.textLabel?.frame.width)! > 0 else {
-            return
-        }
+//        guard (self.textLabel?.frame.width)! > 0 else {
+//            return
+//        }
         timer.invalidate()
 
         if (selected){
         // Configure the view for the selected state
+            if #available(iOS 10.0, *) {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                
+            }
         self.backgroundColor = UIColor.blue
         self.textLabel?.textColor = UIColor.white
             
-        print("Needs Truncating \(self.textLabel?.text) \(self.textLabel?.willBeTruncated())")
+        //print("Needs Truncating \(self.textLabel?.text) \(self.textLabel?.willBeTruncated())")
             if (self.textLabel?.willBeTruncated())!
             {
                 timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(iPodTableViewCell.scrollText), userInfo: nil, repeats: true)
@@ -54,10 +61,11 @@ class iPodTableViewCell: UITableViewCell {
             }
             
         } else{
+            print("unselecting")
             self.textLabel?.text? = originalString
             self.backgroundColor = UIColor.white
             self.textLabel?.textColor = UIColor.black
-            
+//            self.setNeedsDisplay()
         }
     }
     

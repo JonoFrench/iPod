@@ -56,7 +56,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     var nowPlayingPlayPause : UIImageView!
     var trackPosBack : UIView!
     var trackPosFront : UIView!
-    var oldSector : Int = 0
+    var oldSector : Int = -1
     var playingTimer : Timer!
     var activityTimer : Timer!
     var url : URL!
@@ -64,6 +64,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     let headerHeight : CGFloat = 30
     var frameWidth : CGFloat = 0.0
     var frameHeight : CGFloat = 0.0
+    var fullFrameHeight : CGFloat = 0.0
     var playMode : PlayMode!// = PlayMode.Track
     var aboutText : UITextView!
     var aboutPos : CGFloat = 0.0
@@ -89,16 +90,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                                                          name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange,
                                                          object: nil)
         
-        frameWidth = iPodScrollView.frame.width
-        frameHeight = iPodScrollView.frame.height - headerHeight
-        
-        setupMenu()
-        setupArtists()
-        setupAlbums()
-        setupTracks()
-        setupNowPlaying()
-        setupAbout()
-        setupiPod()
+
 
     }
     
@@ -107,9 +99,26 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         super.viewDidLayoutSubviews()
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print ("viewWillAppear")
+        self.view.layoutIfNeeded()
+        frameWidth = iPodScrollView.frame.width
+        frameHeight = iPodScrollView.frame.height - headerHeight
+        fullFrameHeight = iPodScrollView.frame.height
+        setupMenu()
+        setupArtists()
+        setupAlbums()
+        setupTracks()
+        setupNowPlaying()
+        setupAbout()
+        setupiPod()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tblMenu.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.top)
+
+        //tblMenu.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.top)
         
     }
     
@@ -136,6 +145,9 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         iPodScrollView.isUserInteractionEnabled = false
         iPodScrollView.bounces = false
         iPodScrollView.delegate = self
+
+        iPodScrollView.contentSize = CGSize(width: frameWidth * 5, height: fullFrameHeight)
+        print ("frameWidth \(frameWidth) iPodScrollView \(iPodScrollView.frame.width)")
         
         iPodScrollView.addSubview(artistView)
         iPodScrollView.addSubview(albumView)
@@ -143,9 +155,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         iPodScrollView.addSubview(playingView)
         iPodScrollView.addSubview(menuView)
         
-        iPodScrollView.contentSize = CGSize(width: iPodScrollView.frame.width * 5, height: iPodScrollView.frame.height)
-        
-        wheelRecognizer = WheelGestureRecognizer(target: self, action: #selector(iPodViewController.wheeled))
+        wheelRecognizer = WheelGestureRecognizer(target: self, action: #selector(iPodViewController.wheelMoved))
         wheelRecognizer.touchFrame = wheelImage
         wheelImage.addGestureRecognizer(wheelRecognizer)
         wheelImage.isUserInteractionEnabled = true
@@ -162,19 +172,17 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         centerButton.addGestureRecognizer(centerRecognizer)
         centerButton.addSubview(centerView)
         centerButton.layer.zPosition = 200 //Make sure we are at the top
-        tblMenu.allowsSelection = true
-        iPodScrollView.setNeedsLayout()
-        iPodScrollView.setNeedsDisplay()
     }
     
     
     func setupMenu()
     {
-        menuView = UIView(frame: CGRect(x: 0, y: 0, width: frameWidth, height: iPodScrollView.frame.height))
+        menuView = UIView(frame: CGRect(x: 0, y: 0, width: frameWidth, height: fullFrameHeight))
         tblMenu = UITableView(frame: CGRect(x: 0, y: headerHeight, width: frameWidth, height: frameHeight))
         tblMenu.register( UINib(nibName: "iPodTableViewCell",bundle : nil), forCellReuseIdentifier: "iPodTableViewCell")
         menuDataSource.MenuItems = ["Music","Playlists","Options","About","Shuffle Songs"]
-        tblMenu.allowsSelection = false
+        tblMenu.allowsSelection = true
+        tblMenu.allowsMultipleSelection = false
         tblMenu.dataSource = menuDataSource
         tblMenu.delegate = menuDataSource
         tblMenu.rowHeight = 25
@@ -182,18 +190,17 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         tblMenu.isUserInteractionEnabled = false
         tblMenu.separatorStyle = UITableViewCellSeparatorStyle.none
         tblMenu.showsVerticalScrollIndicator = true
-
+        menuDataSource.selectedRow = 0
+        selectedMenuRow = 0
         menuView.addSubview(addHeader(text: "iPod"))
         menuView.addSubview(tblMenu)
-        tblMenu.setNeedsLayout()
-        tblMenu.reloadData()
-
+        tblMenu.selectRow(at: IndexPath(row: selectedMenuRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.middle)
     }
  
     func setupPlaylists()
     {
         playlistDataSource.playlistItems = getPlaylists()
-        playlistView = UIView(frame: CGRect(x:frameWidth, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height))
+        playlistView = UIView(frame: CGRect(x:frameWidth, y: 0, width: frameWidth, height: fullFrameHeight))
         tblPlaylists = UITableView(frame: CGRect(x: 0, y: headerHeight, width: frameWidth, height: frameHeight))
         tblPlaylists.register( UINib(nibName: "iPodTableViewCell",bundle : nil), forCellReuseIdentifier: "iPodTableViewCell")
         tblPlaylists.allowsSelection = true
@@ -208,13 +215,12 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         playlistView.addSubview(addHeader(text: "Playlists"))
         playlistView.addSubview(tblPlaylists)
         iPodScrollView.addSubview(playlistView)
-
     }
     
     func setupArtists()
     {
         artistsDataSource.artistItems = getArtists()
-        artistView = UIView(frame: CGRect(x:frameWidth, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height))
+        artistView = UIView(frame: CGRect(x:frameWidth, y: 0, width: frameWidth, height: fullFrameHeight))
         tblArtists = UITableView(frame: CGRect(x: 0, y: headerHeight, width: frameWidth, height: frameHeight))
         tblArtists.register( UINib(nibName: "iPodTableViewCell",bundle : nil), forCellReuseIdentifier: "iPodTableViewCell")
         tblArtists.allowsSelection = true
@@ -222,30 +228,31 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         tblArtists.delegate = artistsDataSource
         tblArtists.rowHeight = 25
         tblArtists.tableFooterView = nil
-        tblArtists.reloadData()
         tblArtists.isUserInteractionEnabled = false
         tblArtists.separatorStyle = UITableViewCellSeparatorStyle.none
         tblArtists.showsVerticalScrollIndicator = true
+        artistsDataSource.selectedRow = 0
+        selectedArtistRow = 0
         artistView.addSubview(addHeader(text: "Artists"))
         artistView.addSubview(tblArtists)
+        tblArtists.selectRow(at: IndexPath(row: selectedArtistRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.middle)
     }
     
     func setupAlbums()
     {
-        albumView = UIView(frame: CGRect(x: frameWidth * 2, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height))
+        albumView = UIView(frame: CGRect(x: frameWidth * 2, y: 0, width: frameWidth, height: iPodScrollView.frame.height))
         tblAlbums = UITableView(frame: CGRect(x: 0, y: headerHeight, width: frameWidth, height: frameHeight))
-
         tblAlbums.register( UINib(nibName: "iPodTableViewCell",bundle : nil), forCellReuseIdentifier: "iPodTableViewCell")
         tblAlbums.allowsSelection = true
         tblAlbums.dataSource = albumsDataSource
         tblAlbums.delegate = albumsDataSource
-        //tblAlbums.delegate = self
+        albumsDataSource.selectedRow = 0
+        selectedAlbumRow = 0
         tblAlbums.rowHeight = 25
         tblAlbums.tableFooterView = nil
         tblAlbums.isUserInteractionEnabled = false
         tblAlbums.separatorStyle = UITableViewCellSeparatorStyle.none
         tblAlbums.setNeedsLayout()
-        //albumView.translatesAutoresizingMaskIntoConstraints = true
         albumView.addSubview(addHeader(text: "Albums"))
         albumView.addSubview(tblAlbums)
     }
@@ -269,7 +276,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     
     func setupNowPlaying()
     {
-        playingView = UIView(frame: CGRect(x: frameWidth * 4, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height))
+        playingView = UIView(frame: CGRect(x: frameWidth * 4, y: 0, width: frameWidth, height: iPodScrollView.frame.height))
         
         nowPlaying = UIView(frame: CGRect(x: 0, y: headerHeight , width: frameWidth, height: frameHeight))
         nowPlaying.backgroundColor = UIColor.white
@@ -373,16 +380,11 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         case .PlaylistPage:
             break
         case .MenuPage:
-            //let ip : IndexPath = IndexPath(row: selectedArtistRow, section: 0)
-            
-            //let cell : iPodTableViewCell =  tblMenu.cellForRow(at: ip) as! iPodTableViewCell
-            
+
             if selectedMenuRow == 0
             {
                 currentPage = .ArtistsPage
-                tblArtists.selectRow(at: IndexPath(row: selectedArtistRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
-
-                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
+                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
                
             }
 
@@ -391,8 +393,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                 setupPlaylists()
                 currentPage = .PlaylistPage
                 tblPlaylists.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
-                
-                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
+                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
                 
             }
 
@@ -401,7 +402,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
             {
                 currentPage = .AboutPage
                 iPodScrollView.addSubview(aboutView)
-                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
+                iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
             }
             
             if selectedMenuRow == 4
@@ -409,35 +410,40 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                 shuffleSongs()
             }
             break
+
+        case .AlbumPage:
+            let ip : IndexPath = IndexPath(row: selectedAlbumRow, section: 0)
+            
+            let cell : iPodTableViewCell =  tblAlbums.cellForRow(at: ip) as! iPodTableViewCell
+            //print ("Selected Album \(cell.textLabel?.text)")
+            tracksDataSource.tracks = getAlbumTracks(albumItem: cell.mpMedaItem)
+            tblTracks.reloadData()
+            currentPage = .TracksPage
+            tblTracks.setNeedsLayout()
+            tracksDataSource.selectedRow = 0
+            tblTracks.deselectRow(at: IndexPath(row: selectedTrackRow, section: 0), animated: false)
+            selectedTrackRow = 0
+            tblTracks.selectRow(at: IndexPath(row: selectedTrackRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
+            iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth * 3, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
+            break
+
         case .ArtistsPage:
             
             let ip : IndexPath = IndexPath(row: selectedArtistRow, section: 0)
             
             let cell : iPodTableViewCell =  tblArtists.cellForRow(at: ip) as! iPodTableViewCell
-            print ("Selected Artist \(cell.textLabel?.text)")
-            selectedAlbumRow = 0
+            //print ("Selected Artist \(cell.textLabel?.text)")
             currentPage = .AlbumPage
-            
+            tblAlbums.setNeedsLayout()
             albumsDataSource.albums = getArtistAlbums(artistItem: cell.mpMedaItem)
             tblAlbums.reloadData()
+            tblAlbums.deselectRow(at: IndexPath(row: selectedAlbumRow, section: 0), animated: false)
+            selectedAlbumRow = 0
 
-            iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth * 2, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
-            tblAlbums.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.top)
-            tblAlbums.reloadData()
-            
+            tblAlbums.selectRow(at: IndexPath(row: selectedAlbumRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
+            iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth * 2, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
             break
-        case .AlbumPage:
-            let ip : IndexPath = IndexPath(row: selectedAlbumRow, section: 0)
-            
-            let cell : iPodTableViewCell =  tblAlbums.cellForRow(at: ip) as! iPodTableViewCell
-            print ("Selected Album \(cell.textLabel?.text)")
-            selectedTrackRow = 0
-            tracksDataSource.tracks = getAlbumTracks(albumItem: cell.mpMedaItem)
-            tblTracks.reloadData()
-            //tblTracks.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.top)
-            currentPage = .TracksPage
-            iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth * 3, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
-            break
+
         case .TracksPage:
             break
         case .PlayPage:
@@ -449,8 +455,12 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     func controlTapped(t: UITapGestureRecognizer)
     {
         setInactivityTimer()
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        
+        //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            
+        }
         let currentAngle = StaticFunctions.getTouchAngle(touch: t.location(in: wheelImage), frame : wheelImage.frame)
         print("Control Tapped \(currentAngle)")
         
@@ -485,10 +495,14 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                 }
                 break
             case .TracksPage:
+                tblTracks.deselectRow(at: IndexPath(row: selectedTrackRow, section: 0), animated: false)
+                tblTracks.setNeedsDisplay()
                 scrollToPage = 2.0
                 currentPage = .AlbumPage
                 break
             case .AlbumPage:
+                tblAlbums.deselectRow(at: IndexPath(row: selectedAlbumRow, section: 0), animated: false)
+                tblAlbums.setNeedsDisplay()
                 scrollToPage = 1.0
                 currentPage = .ArtistsPage
                 break
@@ -498,7 +512,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                 break
             }
             
-            iPodScrollView.scrollRectToVisible(CGRect(x: iPodScrollView.frame.width * scrollToPage, y: 0, width: iPodScrollView.frame.width, height: iPodScrollView.frame.height), animated: true)
+            iPodScrollView.scrollRectToVisible(CGRect(x: frameWidth * scrollToPage, y: 0, width: frameWidth, height: iPodScrollView.frame.height), animated: true)
             
         }
         else if (currentAngle >= 0.75 && currentAngle <= 2.25)
@@ -600,7 +614,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     
     
     
-    func wheeled(c: WheelGestureRecognizer) {
+    func wheelMoved(c: WheelGestureRecognizer) {
         let direction : Float = c.currentAngle - c.previousAngle
         bearing += 180 * direction / Float(Double.pi)
         
@@ -634,33 +648,26 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
                 let sRect = CGRect(x: 0.0, y: aboutPos, width: aboutText.frame.width, height: aboutText.frame.height)
                 aboutText.scrollRectToVisible(sRect, animated: true)
                 break
+                
             case .MenuPage:
                 if (direction > 0){
-                    if (selectedMenuRow + 1 < (menuDataSource.MenuItems?.count)!)
+                    if (selectedMenuRow + 1 < menuDataSource.MenuItems.count)
                     {
                         selectedMenuRow += 1
                         menuDataSource.selectedRow = selectedMenuRow
-
-                        let ip : IndexPath = IndexPath(row: selectedMenuRow, section: 0)
-                        tblMenu.selectRow(at: ip, animated: false, scrollPosition: UITableViewScrollPosition.middle)
-                        //tblMenu.reloadData()
-
+                        tblMenu.selectRow(at: IndexPath(row: selectedMenuRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.middle)
                     }
-                    
                 }
                 else {
                     if (selectedMenuRow > 0)
                     {
                         selectedMenuRow -= 1
                         menuDataSource.selectedRow = selectedMenuRow
-                        let ip : IndexPath = IndexPath(row: selectedMenuRow, section: 0)
-                        tblMenu.selectRow(at: ip, animated: false, scrollPosition: UITableViewScrollPosition.middle)
-                        //tblMenu.reloadData()
-
+                        tblMenu.selectRow(at: IndexPath(row: selectedMenuRow, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.middle)
                     }
-                    
                 }
                 break
+                
             case .ArtistsPage:
                 
                 if (direction > 0){

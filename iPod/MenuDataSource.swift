@@ -12,7 +12,7 @@ import MediaPlayer
 class MenuDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     
-    public var MenuItems: [String]?
+    public var MenuItems: [String] = []
     public var count : Int = 0
     public var selectedRow : Int = 0
     
@@ -21,7 +21,7 @@ class MenuDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (MenuItems?.count)!
+        return MenuItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -33,7 +33,7 @@ class MenuDataSource: NSObject, UITableViewDataSource, UITableViewDelegate {
   
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let c : iPodTableViewCell = cell as! iPodTableViewCell
-        let menuItem = MenuItems?[indexPath.row]
+        let menuItem = MenuItems[indexPath.row]
         c.textLabel?.text =  menuItem
         c.configure()
         if indexPath.row == selectedRow {
