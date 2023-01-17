@@ -20,7 +20,6 @@
 		345D51261DF592F8008A082F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345D51251DF592F8008A082F /* MediaPlayer.framework */; };
 		345D51281DF59C9D008A082F /* WheelGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345D51271DF59C9D008A082F /* WheelGestureRecognizer.swift */; };
 		347913651E0406EF006643F9 /* MenuDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347913641E0406EF006643F9 /* MenuDataSource.swift */; };
-		34B561C21DF82A18001B66B5 /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B561C11DF82A18001B66B5 /* StaticFunctions.swift */; };
 		34B561C51DF97AAA001B66B5 /* ChicagoFLF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B561C41DF97AAA001B66B5 /* ChicagoFLF.ttf */; };
 		34B561C61DF97AAA001B66B5 /* ChicagoFLF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B561C41DF97AAA001B66B5 /* ChicagoFLF.ttf */; };
 		34B561C71DF97AAA001B66B5 /* ChicagoFLF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B561C41DF97AAA001B66B5 /* ChicagoFLF.ttf */; };
@@ -32,6 +31,9 @@
 		34DDB8DB1DFEABCF00B3CB32 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDB8DA1DFEABCF00B3CB32 /* UIExtensions.swift */; };
 		34DDB8DD1E01807D00B3CB32 /* clicksound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */; };
 		34E290DD1F2790F000131B5D /* PlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */; };
+		34E5A62A2976D20B0008687D /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5A6292976D20B0008687D /* StaticFunctions.swift */; };
+		34E5A62B2976D20B0008687D /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5A6292976D20B0008687D /* StaticFunctions.swift */; };
+		34E5A62C2976D20B0008687D /* StaticFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E5A6292976D20B0008687D /* StaticFunctions.swift */; };
 		34F2416A200E5E340026ACBC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 34F24169200E5E340026ACBC /* README.md */; };
 		34F24171200E5FAD0026ACBC /* IMG_3521.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416C200E5FAD0026ACBC /* IMG_3521.jpg */; };
 		34F24172200E5FAD0026ACBC /* IMG_3520.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34F2416D200E5FAD0026ACBC /* IMG_3520.jpg */; };
@@ -77,7 +79,6 @@
 		345D51251DF592F8008A082F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		345D51271DF59C9D008A082F /* WheelGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelGestureRecognizer.swift; sourceTree = "<group>"; };
 		347913641E0406EF006643F9 /* MenuDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuDataSource.swift; sourceTree = "<group>"; };
-		34B561C11DF82A18001B66B5 /* StaticFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticFunctions.swift; path = ../../Animations/Animations/StaticFunctions.swift; sourceTree = "<group>"; };
 		34B561C41DF97AAA001B66B5 /* ChicagoFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChicagoFLF.ttf; sourceTree = "<group>"; };
 		34B561C81DF9A1E4001B66B5 /* iPodEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPodEnums.swift; sourceTree = "<group>"; };
 		34B561CC1DF9B5EC001B66B5 /* AlbumsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsDataSource.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		34DDB8DA1DFEABCF00B3CB32 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		34DDB8DC1E01807D00B3CB32 /* clicksound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clicksound.mp3; sourceTree = "<group>"; };
 		34E290DC1F2790F000131B5D /* PlaylistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDataSource.swift; sourceTree = "<group>"; };
+		34E5A6292976D20B0008687D /* StaticFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticFunctions.swift; sourceTree = "<group>"; };
 		34F24169200E5E340026ACBC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34F2416C200E5FAD0026ACBC /* IMG_3521.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3521.jpg; sourceTree = "<group>"; };
 		34F2416D200E5FAD0026ACBC /* IMG_3520.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_3520.jpg; sourceTree = "<group>"; };
@@ -179,8 +181,8 @@
 		345D511C1DF58E19008A082F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				34E5A6292976D20B0008687D /* StaticFunctions.swift */,
 				34DDB8DA1DFEABCF00B3CB32 /* UIExtensions.swift */,
-				34B561C11DF82A18001B66B5 /* StaticFunctions.swift */,
 				345D51271DF59C9D008A082F /* WheelGestureRecognizer.swift */,
 				34B561C81DF9A1E4001B66B5 /* iPodEnums.swift */,
 			);
@@ -320,6 +322,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -383,10 +386,10 @@
 				345D50F11DF583C1008A082F /* iPodViewController.swift in Sources */,
 				345D50EF1DF583C1008A082F /* AppDelegate.swift in Sources */,
 				34DDB8DB1DFEABCF00B3CB32 /* UIExtensions.swift in Sources */,
+				34E5A62A2976D20B0008687D /* StaticFunctions.swift in Sources */,
 				345D51231DF58EF7008A082F /* ArtistsDataSource.swift in Sources */,
 				345D51201DF58EB7008A082F /* iPodTableViewCell.swift in Sources */,
 				345D51281DF59C9D008A082F /* WheelGestureRecognizer.swift in Sources */,
-				34B561C21DF82A18001B66B5 /* StaticFunctions.swift in Sources */,
 				34B561C91DF9A1E4001B66B5 /* iPodEnums.swift in Sources */,
 				34B561D11DF9BA15001B66B5 /* TracksDataSource.swift in Sources */,
 				347913651E0406EF006643F9 /* MenuDataSource.swift in Sources */,
@@ -399,6 +402,7 @@
 			files = (
 				34B561CA1DF9A1E4001B66B5 /* iPodEnums.swift in Sources */,
 				345D51041DF583C1008A082F /* iPodTests.swift in Sources */,
+				34E5A62B2976D20B0008687D /* StaticFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +412,7 @@
 			files = (
 				34B561CB1DF9A1E4001B66B5 /* iPodEnums.swift in Sources */,
 				345D510F1DF583C2008A082F /* iPodUITests.swift in Sources */,
+				34E5A62C2976D20B0008687D /* StaticFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +500,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -547,7 +552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -561,11 +566,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9GZ8FVR7LN;
 				INFOPLIST_FILE = iPod/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appdigital.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -575,11 +580,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9GZ8FVR7LN;
 				INFOPLIST_FILE = iPod/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appdigital.iPod;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

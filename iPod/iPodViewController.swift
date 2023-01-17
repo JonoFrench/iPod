@@ -21,7 +21,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     var tblPlaylists: UITableView!
     var tblAlbums: UITableView!
     var tblTracks: UITableView!
-    let player = MPMusicPlayerController.systemMusicPlayer()
+    let player = MPMusicPlayerController.systemMusicPlayer
     var fxplayer: AVAudioPlayer?
     let menuDataSource = MenuDataSource()
     let playlistDataSource = PlaylistDataSource()
@@ -360,7 +360,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         aboutPos = 0.0
     }
     
-    func centerTapped(t: UITapGestureRecognizer)
+    @objc func centerTapped(t: UITapGestureRecognizer)
     {
         print("center Tapped")
         setInactivityTimer()
@@ -452,7 +452,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     }
     
     
-    func controlTapped(t: UITapGestureRecognizer)
+    @objc func controlTapped(t: UITapGestureRecognizer)
     {
         setInactivityTimer()
         //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -614,7 +614,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     
     
     
-    func wheelMoved(c: WheelGestureRecognizer) {
+    @objc func wheelMoved(c: WheelGestureRecognizer) {
         let direction : Float = c.currentAngle - c.previousAngle
         bearing += 180 * direction / Float(Double.pi)
         
@@ -771,9 +771,11 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         var distinctArtists = [MPMediaItem]()
         let query = MPMediaQuery.artists()
         query.groupingType = MPMediaGrouping.albumArtist
-        for collection in query.collections! {
-            let item: MPMediaItem? = collection.representativeItem
-        distinctArtists.append(item!)
+        if let collections = query.collections {
+            for collection in collections {
+                let item: MPMediaItem? = collection.representativeItem
+                distinctArtists.append(item!)
+            }
         }
         return distinctArtists
     }
@@ -856,7 +858,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
     }
     
     
-    func nowPlayingItemIsChanged(notification: NSNotification){
+    @objc func nowPlayingItemIsChanged(notification: NSNotification){
         print("Player state changed")
         guard player.nowPlayingItem != nil else {
             return
@@ -897,7 +899,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         trackPosFront.frame.size = tpFrame
     }
     
-    func playLength()
+    @objc func playLength()
     {
         let t = (player.nowPlayingItem?.playbackDuration)! - player.currentPlaybackTime
         nowPlayingTrackTime.text = "\(Int(t / 60).format(f: "02")) : \(Int(t.truncatingRemainder(dividingBy: 60)).format(f: "02"))"
@@ -915,7 +917,7 @@ class iPodViewController: UIViewController,UITableViewDelegate, UIGestureRecogni
         }
     }
     
-    func inactivityTime()
+    @objc func inactivityTime()
     {
         if player.playbackState == .playing
         {

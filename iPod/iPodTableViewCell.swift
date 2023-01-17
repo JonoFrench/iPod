@@ -28,7 +28,7 @@ class iPodTableViewCell: UITableViewCell {
         self.backgroundColor = UIColor.white
         self.textLabel?.textColor = UIColor.black
         self.isSelected = false
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
         timer.invalidate()
     }
     
@@ -78,8 +78,8 @@ class iPodTableViewCell: UITableViewCell {
         self.textLabel?.font = UIFont(name: "ChicagoFLF", size: 16.0)
         self.backgroundColor = UIColor.white
         self.textLabel?.textColor = UIColor.black
-        self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
         self.textLabel?.lineBreakMode = NSLineBreakMode.byClipping
         self.setNeedsDisplay()
     }
@@ -92,8 +92,8 @@ class iPodTableViewCell: UITableViewCell {
         self.textLabel?.font = UIFont(name: "ChicagoFLF", size: 16.0)
         self.backgroundColor = UIColor.white
         self.textLabel?.textColor = UIColor.black
-        self.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        self.selectionStyle = UITableViewCellSelectionStyle.none
+        self.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        self.selectionStyle = UITableViewCell.SelectionStyle.none
         self.textLabel?.lineBreakMode = NSLineBreakMode.byClipping
         self.setNeedsDisplay()
     }
@@ -103,13 +103,13 @@ class iPodTableViewCell: UITableViewCell {
         configure()
     }
     
-    func scrollText()
+    @objc func scrollText()
     {
         let index1 = originalString.index(originalString.startIndex, offsetBy: scrollPos)
         scrollString = originalString.substring(from: index1) + " " + originalString.substring(to: index1)
         self.textLabel?.text? = scrollString
         scrollPos += 1
-        if scrollPos > originalString.characters.count
+        if scrollPos > originalString.count
         {
             scrollPos = 0
         }
